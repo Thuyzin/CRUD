@@ -31,6 +31,27 @@
         </tr>
         </tbody>
     </table>
+
+    <!-- Paginador -->
+    <nav>
+        <ul class="pagination justify-content-center">
+            <!-- Botão Anterior -->
+            <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/produtos/listar(page=${currentPage - 1}, size=10)}">Anterior</a>
+            </li>
+            <!-- Botões de Páginas Visíveis -->
+            <li class="page-item" th:each="pageNum : ${#numbers.sequence(startPage, endPage - 1)}"
+                th:classappend="${pageNum == currentPage} ? 'active'">
+                <a class="page-link" th:href="@{/produtos/listar(page=${pageNum}, size=10)}" th:text="${pageNum + 1}"></a>
+            </li>
+
+            <!-- Botão Próximo -->
+            <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+                <a class="page-link" th:href="@{/produtos/listar(page=${currentPage + 1}, size=10)}">Próxima</a>
+            </li>
+        </ul>
+    </nav>
+
     <a href="/produtos" class="btn btn-warning">Voltar inicio</a>
 </div>
 </body>
